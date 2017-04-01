@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>JisPipe</title>
+	<meta name="viewport" content="width=device-width">
+
+	<script src="jispipe.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Pipe Calculater</h1>
+		<p class="lead">Calculating flowrate or velocity in pipes.</p>
+	</div>
+
+	<div class="panel panel-default col-md-4">
+		<div class="panel-heading">
+			<h3 class="panel-title">Pipe</h3>
+		</div>
+		<div class="panel-body">
+			<select class="col-md-3" id="nominalDiameter" onchange="setDiameter();repeatCalc();">
+				<<option value="-">-</option>
+				<option value="6A">6A</option>
+				<option value="8A">8A</option>
+				<option value="10A">10A</option>
+				<option value="15A">15A</option>
+				<option value="20A">20A</option>
+				<option value="25A">25A</option>
+				<option value="32A">32A</option>
+				<option value="40A">40A</option>
+				<option value="50A">50A</option>
+				<option value="65A">65A</option>
+				<option value="80A">80A</option>
+				<option value="90A">90A</option>
+				<option value="100A">100A</option>
+				<option value="125A">125A</option>
+				<option value="150A">150A</option>
+				<option value="200A">200A</option>
+				<option value="250A">250A</option>
+				<option value="300A">300A</option>
+				<option value="350A">350A</option>
+				<option value="400A">400A</option>
+				<option value="450A">450A</option>
+				<option value="500A">500A</option>
+				<option value="6A">1/8B</option>
+				<option value="8A">1/4B</option>
+				<option value="10A">3/8B</option>
+				<option value="15A">1/2B</option>
+				<option value="20A">3/4B</option>
+				<option value="25A">1B</option>
+				<option value="32A">1-1/4B</option>
+				<option value="40A">1-1/2B</option>
+				<option value="50A">2B</option>
+				<option value="65A">2-1/2B</option>
+				<option value="80A">3B</option>
+				<option value="90A">3-1/2B</option>
+				<option value="100A">4B</option>
+				<option value="125A">5B</option>
+				<option value="150A">6B</option>
+				<option value="200A">8B</option>
+				<option value="250A">10B</option>
+				<option value="300A">12B</option>
+				<option value="350A">14B</option>
+				<option value="400A">16B</option>
+				<option value="450A">18B</option>
+				<option value="500A">20B</option>
+				<option value="1S">1S</option>
+				<option value="1.25S">1.25S</option>
+				<option value="1.5S">1.5S</option>
+				<option value="2S">2S</option>
+				<option value="2.5S">2.5S</option>
+				<option value="3S">3S</option>
+				<option value="3.5S">3.5S</option>
+				<option value="4S">4S</option>
+				<option value="4.5S">4.5S</option>
+				<option value="5.5S">5.5S</option>
+				<option value="6.5S">6.5S</option>
+			</select>
+
+			<select class="col-md-3" id="nominalThickness" onchange="setDiameter();repeatCalc();">
+				<<option value="-">-</option>
+				<option value="SGP">SGP</option>
+				<option value="SCH10">SCH10</option>
+				<option value="SCH20">SCH20</option>
+				<option value="SCH30">SCH30</option>
+				<option value="SCH40">SCH40</option>
+				<option value="SCH60">SCH60</option>
+				<option value="SCH80">SCH80</option>
+				<option value="SCH100">SCH100</option>
+				<option value="SCH120">SCH120</option>
+				<option value="SCH140">SCH140</option>
+				<option value="SCH160">SCH160</option>
+				<option value="SCH5S">SCH5S</option>
+				<option value="SCH10S">SCH10S</option>
+				<option value="SCH20S">SCH20S</option>
+				<option value="SANITARY">SANITARY</option>
+				<option value="VP">VP</option>
+				<option value="VU">VU</option>
+				<option value="HIVP">HIVP</option>
+				<option value="VLP">VLP</option>
+			</select>
+
+			<div class="input-group">
+				<input class="form-control" type="number" id="diameter" onchange="repeatCalc();"></input>
+				<span class="input-group-addon">mm</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default col-md-4">
+		<div class="panel-heading">
+			<h3 class="panel-title">Velocity</h3>
+		</div>
+		<div class="panel-body">
+			<div class="input-group">
+				<input class="form-control" type="number" id="velocity" onchange="setFlowRate(this);"></input>
+				<span class="input-group-addon">m/s</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default col-md-4">
+
+		<div class="panel-heading">
+			<h3 class="panel-title">Flow Rate</h3>
+		</div>
+		<div class="panel-body">
+			<div class="input-group">
+				<input class="form-control" type="number" id="flowRateLPM" onchange="setVelocity(this,'LPM');"></input>
+				<span class="input-group-addon">L/min</span>
+			</div>
+			<div class="input-group">
+				<input class="form-control" type="number" id="flowRateCMM" onchange="setVelocity(this,'CMM');"></input>
+				<span class="input-group-addon">m<sup>3</sup>/min</span>
+			</div>
+			<div class="input-group">
+				<input class="form-control" type="number" id="flowRateCMH" onchange="setVelocity(this,'CMH');"></input>
+				<span class="input-group-addon">m<sup>3</sup>/hr</span>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>
