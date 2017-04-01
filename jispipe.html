@@ -26,7 +26,7 @@
 		</div>
 		<div class="panel-body">
 			<select class="col-md-3" id="nominalDiameter" onchange="setDiameter();repeatCalc();">
-				<<option value="-">-</option>
+				<option value="-">-</option>
 				<option value="6A">6A</option>
 				<option value="8A">8A</option>
 				<option value="10A">10A</option>
@@ -85,7 +85,7 @@
 			</select>
 
 			<select class="col-md-3" id="nominalThickness" onchange="setDiameter();repeatCalc();">
-				<<option value="-">-</option>
+				<option value="-">-</option>
 				<option value="SGP">SGP</option>
 				<option value="SCH10">SCH10</option>
 				<option value="SCH20">SCH20</option>
@@ -108,7 +108,7 @@
 			</select>
 
 			<div class="input-group">
-				<input class="form-control" type="number" id="diameter" onchange="repeatCalc();"></input>
+				<input class="form-control" type="number" pattern="[\d\.]*" id="diameter" onchange="repeatCalc();">
 				<span class="input-group-addon">mm</span>
 			</div>
 		</div>
@@ -120,7 +120,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="input-group">
-				<input class="form-control" type="number" id="velocity" onchange="setFlowRate(this);"></input>
+				<input class="form-control" type="number" pattern="[\d\.]*" id="velocity" onchange="setFlowRate(this);">
 				<span class="input-group-addon">m/s</span>
 			</div>
 		</div>
@@ -133,15 +133,15 @@
 		</div>
 		<div class="panel-body">
 			<div class="input-group">
-				<input class="form-control" type="number" id="flowRateLPM" onchange="setVelocity(this,'LPM');"></input>
+				<input class="form-control" type="number" pattern="[\d\.]*" id="flowRateLPM" onchange="setVelocity(this,'LPM');">
 				<span class="input-group-addon">L/min</span>
 			</div>
 			<div class="input-group">
-				<input class="form-control" type="number" id="flowRateCMM" onchange="setVelocity(this,'CMM');"></input>
+				<input class="form-control" type="number" pattern="[\d\.]*" id="flowRateCMM" onchange="setVelocity(this,'CMM');">
 				<span class="input-group-addon">m<sup>3</sup>/min</span>
 			</div>
 			<div class="input-group">
-				<input class="form-control" type="number" id="flowRateCMH" onchange="setVelocity(this,'CMH');"></input>
+				<input class="form-control" type="number" pattern="[\d\.]*" id="flowRateCMH" onchange="setVelocity(this,'CMH');">
 				<span class="input-group-addon">m<sup>3</sup>/hr</span>
 			</div>
 		</div>
