@@ -416,7 +416,7 @@ function setNumber(id, value){
 
 function sround(num, digit){
   var selfdigit = Math.floor(Math.log10(Math.abs(num))) + 1;
-  var x = 10**(digit - selfdigit);
+  var x = Math.pow(10, digit - selfdigit);
 
   return Math.round(num * x) / x;
 }
