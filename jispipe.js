@@ -366,7 +366,7 @@ function setFlowRate(elem, fr=null){
   if(!fr){
     var id = getNumber("diameter");
     var v = getNumber("velocity");
-    fr = (id/1000)**2 * Math.PI / 4 * v; // m3/s
+    fr = Math.pow(id/1000, 2)* Math.PI / 4 * v; // m3/s
   }
 
   var frLpm = fr * 1000 * 60;
@@ -393,7 +393,7 @@ function setVelocity(elem, unit){
   setFlowRate(elem, fr);
 
   var id = getNumber("diameter");
-  var v = fr / ((id/1000)**2 * Math.PI / 4);
+  var v = fr / (Math.pow(id/1000, 2) * Math.PI / 4);
 
   setNumber("velocity", v);
 }
