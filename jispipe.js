@@ -343,22 +343,53 @@ lastInput = null;
 
 
 function pipeInternalDia(nt, nd){
-	var d = pipeData[nt][nd];
-	var od = d[0];
-	var t = d[1];
-  var id = od - t*2
-	return Math.round(id*10) / 10;
+  try{
+  	var d = pipeData[nt][nd];
+  	var od = d[0];
+  	var t = d[1];
+    var id = od - t*2
+  	return Math.round(id*10) / 10;
+  }catch(e){
+    return null;
+  }
 }
 
 
 function setDiameter(){
+  clearDiaError();
+
   var nd = document.getElementById("nominalDiameter").value;
   var nt = document.getElementById("nominalThickness").value;
   var d = pipeInternalDia(nt, nd)
 
-  setNumber("diameter", d);
+  if(d){
+    setNumber("diameter", d);
+  }else{
+    setDiaError();
+  }
 }
 
+
+function setDiaError(){
+  var elem = document.getElementById("diameter");
+  elem.value = "";
+  elem.placeholder = "no data";
+  elem.parentNode.classList.add("has-error");
+}
+
+
+function clearDiaError(){
+  var elem = document.getElementById("diameter");
+  elem.placeholder = "";
+  elem.parentNode.classList.remove("has-error");
+}
+
+
+function inputDia(){
+  document.getElementById("nominalDiameter").selectedIndex = 0;
+  document.getElementById("nominalThickness").selectedIndex = 0;
+  clearDiaError();
+}
 
 function setFlowRate(elem, fr=null){
   lastInput = elem;
@@ -400,7 +431,9 @@ function setVelocity(elem, unit){
 
 
 function repeatCalc(){
-  lastInput.onchange();
+  if(lastInput){
+    lastInput.onchange();
+  }
 }
 
 
@@ -415,8 +448,12 @@ function setNumber(id, value){
 
 
 function sround(num, digit){
-  var selfdigit = Math.floor(Math.log10(Math.abs(num))) + 1;
-  var x = Math.pow(10, digit - selfdigit);
+  if(num == 0){
+    return 0;
+  }else{
+    var selfdigit = Math.floor(Math.log10(Math.abs(num))) + 1;
+    var x = Math.pow(10, digit - selfdigit);
 
-  return Math.round(num * x) / x;
+    return Math.round(num * x) / x;
+  }
 }
